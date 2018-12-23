@@ -1,0 +1,8 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.github.trang.autoconfigure.context.ApplicationProfileAutoConfiguration,\
+  com.github.trang.autoconfigure.context.ApplicationContextAutoConfiguration,\
+  com.github.trang.autoconfigure.mybatis.MyBatisAutoConfiguration,\
+  com.github.trang.autoconfigure.druid.DruidAutoConfiguration,\
+  com.github.trang.autoconfigure.druid.DruidDataSourceInitializerAutoConfiguration,\
+  com.github.trang.autoconfigure.redisson.RedissonAutoConfiguration,\
+  com.github.trang.autoconfigure.redisson.RedissonSpringAutoConfiguration

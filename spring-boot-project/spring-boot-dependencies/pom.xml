@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--
+        其实这里应该是继承自 spring-boot-dependencies，再由 parent 工程继承 dependencies，
+        spring-boot-starter-parent 中定义的配置通过 import 的方式引入到 parent
+
+        但是！model 4.x 中并不支持 import plugins，只能通过继承的方式实现……
+
+        又由于 maven 单继承的规则，无论是继承 spring-boot-starter-parent 还是 dependencies 都不完美，
+        所以只能在这继承 spring-boot-starter-parent 了
+
+        期盼 model 5.x 中能解决这个问题……
+        https://issues.apache.org/jira/browse/MNG-5588
+     -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.1.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <!-- 项目的 Maven 坐标 -->
+    <groupId>com.github.drtrang</groupId>
+    <artifactId>spring-boot-dependencies</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <!-- 项目描述 -->
+    <name>Spring Boot Dependencies</name>
+    <description>${project.name}</description>
+
+    <!-- 许可信息 -->
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <!-- 组织信息 -->
+    <organization>
+        <name>trang</name>
+        <url>http://blog.trang.space</url>
+    </organization>
+
+    <!-- 开发者信息 -->
+    <developers>
+        <developer>
+            <id>trang</id>
+            <name>trang</name>
+            <email>donghao.l@hotmail.com</email>
+            <timezone>+8</timezone>
+            <url>http://blog.trang.space</url>
+        </developer>
+    </developers>
+
+    <!-- 源码管理 -->
+    <scm>
+        <connection>scm:git:https://github.com/drtrang/spring-boot.git</connection>
+        <developerConnection>scm:git:git@github.com:drtrang/spring-boot.git</developerConnection>
+        <url>https://github.com/drtrang/spring-boot</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <!-- 问题管理 -->
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/drtrang/spring-boot/issues</url>
+    </issueManagement>
+
+    <!-- 项目发布管理 -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>oss</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>oss</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <properties>
+        <!-- 工程参数 -->
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <it.skip>false</it.skip>
+        <!-- 三方库依赖 -->
+        <!-- java 底层包 -->
+        <asm.version>7.0</asm.version>
+        <byte-buddy.version>1.9.6</byte-buddy.version>
+        <cglib.version>3.2.10</cglib.version>
+        <javassist.version>3.24.1-GA</javassist.version>
+        <!-- retrofit2/okhttp3/okio 要同时升级，一般与 retrofit2 默认依赖的 okhttp3 版本保持一致 -->
+        <retrofit2.version>2.5.0</retrofit2.version>
+        <okhttp3.version>3.12.0</okhttp3.version>
+        <okio.version>1.16.0</okio.version>
+
+        <automon.version>1.0.2</automon.version>
+        <auto-common.version>0.10</auto-common.version>
+        <auto-value.version>1.6.3</auto-value.version>
+        <chronicle-map.version>3.17.0</chronicle-map.version>
+        <commons-collections4.version>4.2</commons-collections4.version>
+        <commons-compress.version>1.18</commons-compress.version>
+        <commons-configuration2.version>2.4</commons-configuration2.version>
+        <commons-digester3.version>3.2</commons-digester3.version>
+        <commons-io.version>2.6</commons-io.version>
+        <commons-logging.version>1.2</commons-logging.version>
+        <commons-math3.version>3.6.1</commons-math3.version>
+        <commons-net.version>3.6</commons-net.version>
+        <commons-validator.version>1.6</commons-validator.version>
+        <cron-utils.version>8.0.0</cron-utils.version>
+        <curator.version>4.0.1</curator.version>
+        <druid.version>1.1.12</druid.version>
+        <easypoi.version>3.3.0</easypoi.version>
+        <eclipse-collections.version>10.0.0.M2</eclipse-collections.version>
+        <fastutil.version>8.2.2</fastutil.version>
+        <fluent-validator.version>1.0.9</fluent-validator.version>
+        <fst.version>2.57</fst.version>
+        <guava.version>27.0.1-jre</guava.version>
+        <hppc.version>0.8.1</hppc.version>
+        <javax.persistence-api.version>2.2</javax.persistence-api.version>
+        <javasimon.version>4.1.4</javasimon.version>
+        <leakcanary.version>1.6.2</leakcanary.version>
+        <libphonenumber.version>8.10.2</libphonenumber.version>
+        <logback-ext-spring.version>0.1.5</logback-ext-spring.version>
+        <mapper.version>4.1.2</mapper.version>
+        <mapper-module.version>1.1.2</mapper-module.version>
+        <mapper-weekend.version>1.1.4.4</mapper-weekend.version>
+        <mapper-spring-boot-starter.version>2.1.2</mapper-spring-boot-starter.version>
+        <mybatis-dynamic-sql.version>1.1.0</mybatis-dynamic-sql.version>
+        <mybatis-generator.version>1.3.7</mybatis-generator.version>
+        <mybatis-spring-boot-starter.version>1.3.2</mybatis-spring-boot-starter.version>
+        <mybatis-spring.version>1.3.2</mybatis-spring.version>
+        <mybatis-typehandlers-jsr310.version>1.0.2</mybatis-typehandlers-jsr310.version>
+        <mybatis.version>3.4.6</mybatis.version>
+        <mysql-binlog.version>0.16.1</mysql-binlog.version>
+        <orika.version>1.5.2</orika.version>
+        <pagehelper.version>5.1.8</pagehelper.version>
+        <pagehelper-spring-boot-starter.version>1.2.10</pagehelper-spring-boot-starter.version>
+        <pcollections.version>3.0.3</pcollections.version>
+        <pdfbox.version>2.0.13</pdfbox.version>
+        <poi.version>4.0.1</poi.version>
+        <powermock.version>2.0.0-RC.4</powermock.version>
+        <redisson.version>3.9.1</redisson.version>
+        <sharding-sphere.version>3.0.0.M4</sharding-sphere.version>
+        <streamex.version>0.6.7</streamex.version>
+        <strman.version>0.4.0</strman.version>
+        <swagger2.version>2.9.2</swagger2.version>
+        <swagger-spring-boot-starter.version>1.8.0.RELEASE</swagger-spring-boot-starter.version>
+        <tablesaw.version>0.30.1</tablesaw.version>
+        <testng.version>6.14.3</testng.version>
+        <thumbnailator.version>0.4.8</thumbnailator.version>
+        <trove4j.version>3.0.3</trove4j.version>
+        <univocity-parsers.version>2.7.6</univocity-parsers.version>
+        <xerces.version>2.12.0</xerces.version>
+        <zxing.version>3.3.3</zxing.version>
+        <!-- w.vela -->
+        <adaptive-executor.version>0.1.4</adaptive-executor.version>
+        <buffer-trigger.version>0.2.12</buffer-trigger.version>
+        <cursor-iterator.version>1.0.11</cursor-iterator.version>
+        <model-view-builder.version>1.1.2</model-view-builder.version>
+        <more-lambdas.version>0.1.27</more-lambdas.version>
+        <retrieve-id-utils.version>1.0.7</retrieve-id-utils.version>
+        <scope.version>1.0.7</scope.version>
+        <simple-failover.version>0.1.15</simple-failover.version>
+        <simple-pool.version>0.1.17</simple-pool.version>
+        <stats-helper.version>0.2.2</stats-helper.version>
+        <zkconfig-resources.version>1.1.27</zkconfig-resources.version>
+        <zknotify-cache.version>0.1.9</zknotify-cache.version>
+        <!-- Test Dependencies -->
+        <junit-params.version>1.1.1</junit-params.version>
+        <junit-platform.version>1.3.2</junit-platform.version>
+        <!-- Maven 插件 -->
+        <cobertura-maven-plugin.version>2.7</cobertura-maven-plugin.version>
+        <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
+        <duplicate-finder-maven-plugin.version>1.3.0</duplicate-finder-maven-plugin.version>
+        <flatten-maven-plugin.version>1.0.1</flatten-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
+        <license-maven-plugin.version>3.0</license-maven-plugin.version>
+        <maven-archetype-plugin.version>3.0.1</maven-archetype-plugin.version>
+        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M2</maven-surefire-plugin.version>
+        <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+        <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+        <maven-install-plugin.version>3.0.0-M1</maven-install-plugin.version>
+        <os-maven-plugin.version>1.6.1</os-maven-plugin.version>
+        <tycho-versions-plugin.version>1.3.0</tycho-versions-plugin.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- 本项目中的依赖 -->
+            <dependency>
+                <groupId>com.github.drtrang</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.drtrang</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.drtrang</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- 日志 & 日志桥接，别的都在 spring-boot-starter-logging 里，这个是漏掉的老版本 log4j -->
+            <!-- https://www.slf4j.org/legacy.html -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>log4j-over-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <!-- https://github.com/qos-ch/logback-extensions/wiki/Spring -->
+            <dependency>
+                <groupId>org.logback-extensions</groupId>
+                <artifactId>logback-ext-spring</artifactId>
+                <version>${logback-ext-spring.version}</version>
+            </dependency>
+            <!-- druid 数据库连接池 -->
+            <!-- https://github.com/alibaba/druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!-- mysql 驱动 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <!-- h2 数据库 -->
+            <!-- https://github.com/h2database/h2database -->
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <!-- mybatis orm 框架 -->
+            <!-- https://github.com/mybatis/mybatis-3 -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <!-- https://github.com/mybatis/spring -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis-spring.version}</version>
+            </dependency>
+            <!-- https://github.com/mybatis/spring-boot-starter -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-spring-boot-starter.version}</version>
+            </dependency>
+            <!-- https://github.com/mybatis/typehandlers-jsr310 -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-typehandlers-jsr310</artifactId>
+                <version>${mybatis-typehandlers-jsr310.version}</version>
+            </dependency>
+            <!-- https://github.com/mybatis/mybatis-dynamic-sql -->
+            <dependency>
+                <groupId>org.mybatis.dynamic-sql</groupId>
+                <artifactId>mybatis-dynamic-sql</artifactId>
+                <version>${mybatis-dynamic-sql.version}</version>
+            </dependency>
+            <!-- redisson -->
+            <!-- https://github.com/redisson/redisson -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+            <!-- fst 序列化 -->
+            <!-- https://github.com/RuedigerMoeller/fast-serialization -->
+            <dependency>
+                <groupId>de.ruedigermoeller</groupId>
+                <artifactId>fst</artifactId>
+                <version>${fst.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.basepom.maven</groupId>
+                    <artifactId>duplicate-finder-maven-plugin</artifactId>
+                    <version>${duplicate-finder-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
